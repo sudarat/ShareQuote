@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @post.user %>
+</p>
+
+<p>
+  <b>Message:</b>
+  <%= @post.message %>
+</p>
+
+<p>
+  <b>Time share:</b>
+  <%= @post.time_share %>
+</p>
+
+<p>
+  <b>Vote all:</b>
+  <%= @post.vote_all %>
+</p>
+
+<p>
+  <b>Vote week:</b>
+  <%= @post.vote_week %>
+</p>
+
+<%= link_to 'Vote up', voteup_post_path(@post) %> 
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
