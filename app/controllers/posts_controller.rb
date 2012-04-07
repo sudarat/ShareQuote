@@ -3,11 +3,13 @@ class PostsController < ApplicationController
   # GET /posts.xml
   def index
     @posts = Post.all
+#      @posts = Post.tagged_with("awesome" , :on => :tags)
     weekend
     @posts = Post.all
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @posts }
+      format.json { render :json => @posts }
     end
   end
 
@@ -15,9 +17,11 @@ class PostsController < ApplicationController
   # GET /posts/1.xml
   def show
     @post = Post.find(params[:id])
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @post }
+      format.json { render :json => @post }
     end
   end
 
@@ -29,6 +33,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @post }
+      format.json { render :json => @post }
     end
   end
 
@@ -44,13 +49,17 @@ class PostsController < ApplicationController
     @post.vote_all = 0
     @post.vote_week = 0
     @post.updateweek = false
+    @post.time_share = Time.now
+#     @post.tag_list ="awesome, slick, hefty" 
     respond_to do |format|
       if @post.save
         format.html { redirect_to(@post, :notice => 'Post was successfully created.') }
         format.xml  { render :xml => @post, :status => :created, :location => @post }
+	format.json { render :json => @post, :status => :created, :location => @post }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
+	format.json  { render :json => @post.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -64,9 +73,11 @@ class PostsController < ApplicationController
       if @post.update_attributes(params[:post])
         format.html { redirect_to(@post, :notice => 'Post was successfully updated.') }
         format.xml  { head :ok }
+	format.json  { head :ok }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
+	format.json  { render :json => @post.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -82,9 +93,11 @@ class PostsController < ApplicationController
       if @post.update_attributes(params[:post])
         format.html { redirect_to(@post, :notice => 'Post was successfully vote up.') }
         format.xml  { head :ok }
+	format.json  { head :ok }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
+	format.json  { render :json => @post.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -112,6 +125,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @post }
+      format.json  { render :json => @post }
     end
   end
   
@@ -124,6 +138,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(posts_url) }
       format.xml  { head :ok }
+      format.json  { head :ok }
     end
   end
   

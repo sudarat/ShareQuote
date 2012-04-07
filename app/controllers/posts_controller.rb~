@@ -3,11 +3,13 @@ class PostsController < ApplicationController
   # GET /posts.xml
   def index
     @posts = Post.all
+#      @posts = Post.tagged_with("awesome" , :on => :tags)
     weekend
     @posts = Post.all
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @posts }
+      format.json { render :json => @posts }
     end
   end
 
@@ -15,9 +17,11 @@ class PostsController < ApplicationController
   # GET /posts/1.xml
   def show
     @post = Post.find(params[:id])
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @post }
+      format.json { render :json => @post }
     end
   end
 
@@ -29,6 +33,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @post }
+      format.json { render :json => @post }
     end
   end
 
@@ -44,6 +49,8 @@ class PostsController < ApplicationController
     @post.vote_all = 0
     @post.vote_week = 0
     @post.updateweek = false
+    @post.time_share = Time.now
+#     @post.tag_list ="awesome, slick, hefty" 
     respond_to do |format|
       if @post.save
         format.html { redirect_to(@post, :notice => 'Post was successfully created.') }
@@ -109,6 +116,18 @@ class PostsController < ApplicationController
 #     Thing.first(:order => "RANDOM()") # For MySQL :order => "RAND()", - thanx, @DanSingerman
 # Rails 3
     @post = Post.order("RANDOM()").first
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @post }
+    end
+  end
+  
+  def tag 
+    @posts = Post.tagged_with(@post.tag_list[@tax_no] , :on => :tags)
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @posts }
+    end
   end
   
   # DELETE /posts/1

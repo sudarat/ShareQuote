@@ -1,0 +1,4 @@
+
+  <%= stylesheet_link_tag 'quote/screen', :media => 'all' %>
+
+<!--   <%= stylesheet_link_tag 'custom', :media => 'screen' %> -->

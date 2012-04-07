@@ -1,13 +1,20 @@
-<h1>Listing posts</h1>
+<h3>Listing posts</h3> 
 
+
+<div style="border:20px solid #3399CC">
 <table>
   <tr>
-    <th>User</th>
+    <%= link_to 'New Post', new_post_path %>
+    <%= link_to 'Random', posts_random_path ,:class => "right"%>
+  <hr>
+  </tr>
+  <tr>
+    <th width="100px">User</th>
     
-    <th>Message</th>
-    <th>Vote all</th>
-    <th>Vote week</th>
-    <th>Time share</th>
+    <th width="400px">Message</th>
+    <th width="50px">Vote all</th>
+    <th width="50px">Vote week</th>
+    <th width="100px">Time share</th>
     <th></th>
     <th></th>
     <th></th>
@@ -18,12 +25,12 @@
 <% @posts.each do |post| %>
   <tr>
     <td><%= post.user %></td>
-    <td><%= post.message %></td>
+    <td><%= post.message[0..40]+'...' %></td>
     <td><%= post.vote_all %></td>
     <td><%= post.vote_week %></td>
     <td><%= post.time_share.strftime("%Y-%m-%d %H:%M:%S")  %></td>
     <td></td>
-    <td><%= link_to 'Vote up', voteup_post_path(post) %> </td>
+    <td><%= link_to 'Vote', voteup_post_path(post) %> </td>
     <td><%= link_to 'Show', post %></td>
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
     <td><%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></td>
@@ -32,5 +39,5 @@
 </table>
 
 <br />
-<% link_to 'Random', posts_random_path %>
-<%= link_to 'New Post', new_post_path %>
+</div>
+

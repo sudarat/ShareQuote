@@ -1,3 +1,6 @@
+<h3>Random post</h3>
+
+
 <p>
   <b>User:</b>
   <%= @post.user %>
@@ -23,4 +26,4 @@
   <%= @post.vote_week %>
 </p>
 
-<%= 'back',posts_path%>
+<%= link_to 'back',posts_path%>

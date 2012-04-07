@@ -1,10 +1,14 @@
 Kumkom::Application.routes.draw do
   
-  get "posts/random" #รอ
+  resources :tags
+  
+  get "posts/random" #random
+  get "posts/tag"
   
   resources :posts do
     member do
       get 'voteup'
+#       get 'tag'
 #       get 'votedown'
     end
   end

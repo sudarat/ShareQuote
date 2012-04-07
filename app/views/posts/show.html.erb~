@@ -1,4 +1,8 @@
 <p id="notice"><%= notice %></p>
+<h3>Post</h3>
+<%= link_to 'New Post', new_post_path %>
+<%= link_to 'Random', posts_random_path ,:class => "right"%>
+<hr>
 
 <p>
   <b>User:</b>
@@ -11,8 +15,22 @@
 </p>
 
 <p>
+  <b>Tag:</b>
+  <% @tax_no = 0 %>
+ <% @post.tag_list.each do |post| %>
+  <% if @post.tag_list[@tax_no] == @post.tag_list.last%>
+    <%= link_to @post.tag_list[@tax_no], tags_path(:name => @post.tag_list[@tax_no]) %>
+  <% else %>
+    <%= link_to @post.tag_list[@tax_no], tags_path(:name => @post.tag_list[@tax_no]) %>,
+  <% end %>
+  <% @tax_no = @tax_no+1 %>
+ <% end %>
+<!--   <%= @post.tag_list %> -->
+</p>
+
+<p>
   <b>Time share:</b>
-  <%= @post.time_share %>
+  <%= @post.time_share.strftime("%Y-%m-%d %H:%M:%S") %>
 </p>
 
 <p>

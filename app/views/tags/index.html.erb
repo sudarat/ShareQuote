@@ -1,0 +1,43 @@
+<h3>Listing posts tag : <%= params[:name] %></h3> 
+
+
+
+<table>
+  <tr>
+    <%= link_to 'New Post', new_post_path %>
+    <%= link_to 'Random', posts_random_path ,:class => "right"%>
+  <hr>
+  </tr>
+  <tr>
+    <th width="100px">User</th>
+    
+    <th width="400px">Message</th>
+    <th width="50px">Vote all</th>
+    <th width="50px">Vote week</th>
+    <th width="100px">Time share</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @posts.each do |post| %>
+  <tr>
+    <td><%= post.user %></td>
+    <td><%= post.message[0..40]+'...' %></td>
+    <td><%= post.vote_all %></td>
+    <td><%= post.vote_week %></td>
+    <td><%= post.time_share.strftime("%Y-%m-%d %H:%M:%S")  %></td>
+    <td></td>
+    <td><%= link_to 'Vote', voteup_post_path(post) %> </td>
+    <td><%= link_to 'Show', post %></td>
+    <td><%= link_to 'Edit', edit_post_path(post) %></td>
+    <td><%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<%= link_to 'back', posts_path %>
+
