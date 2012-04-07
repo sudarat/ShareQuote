@@ -105,6 +105,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def random
+#     Thing.first(:order => "RANDOM()") # For MySQL :order => "RAND()", - thanx, @DanSingerman
+# Rails 3
+    @post = Post.order("RANDOM()").first
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @post }
+    end
+  end
   
   # DELETE /posts/1
   # DELETE /posts/1.xml

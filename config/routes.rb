@@ -1,4 +1,7 @@
 Kumkom::Application.routes.draw do
+  
+  get "posts/random" #รอ
+  
   resources :posts do
     member do
       get 'voteup'

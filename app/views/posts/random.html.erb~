@@ -1,0 +1,26 @@
+<p>
+  <b>User:</b>
+  <%= @post.user %>
+</p>
+
+<p>
+  <b>Message:</b>
+  <%= @post.message %>
+</p>
+
+<p>
+  <b>Time share:</b>
+  <%= @post.time_share.strftime("%Y-%m-%d %H:%M:%S") %>
+</p>
+
+<p>
+  <b>Vote all:</b>
+  <%= @post.vote_all %>
+</p>
+
+<p>
+  <b>Vote week:</b>
+  <%= @post.vote_week %>
+</p>
+
+<%= 'back',posts_path%>
