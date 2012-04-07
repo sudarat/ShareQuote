@@ -1,6 +1,6 @@
 class AddUserToPosts < ActiveRecord::Migration
   def self.up
-    add_column :posts, :user, :string
+    add_column :posts, :user, :srtring
   end
 
   def self.down
